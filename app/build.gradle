@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
+
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.wong.note"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+greendao{
+    schemaVersion 2 // 数据库版本号
+    daoPackage  'com.wong.note.greendao.gen'//greenDao 自动生成的代码保存的包名
+    targetGenDir   'src/main/java' //自动生成的代码存储的路径，默认是 build/generated/source/greendao.
+    generateTests false //true的时候自动生成测试单元
+    targetGenDirTests 'src/androidTest/java' //测试单元的生成目录默认是
+}
+
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'com.android.support:design:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //greenDAO是一款高效、快速的SQLite型数据库
+    implementation 'org.greenrobot:greendao:3.2.2' // add library
+    //Butter Knife所提供了一种能力——使用注解生成模板代码，将view与方法和参数绑定。
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //一款自定义dialog框架
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+
+    //bubly
+    implementation 'com.tencent.bugly:crashreport:2.6.6.1' //其中lat
+
+}
